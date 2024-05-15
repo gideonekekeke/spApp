@@ -1,7 +1,7 @@
 import React from "react";
 import { useColorScheme } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { NativeBaseProvider } from "native-base";
+import { NativeBase } from "native-base";
 // import { Provider } from "react-redux";
 import { SSRProvider } from "@react-aria/ssr";
 // import { PersistGate } from "redux-persist/integration/react";
@@ -73,17 +73,11 @@ export const App = () => {
 		<>
 			<StatusBar />
 			{/* <Provider store={store}> */}
-				{/* <PersistGate loading={null} persistor={persistor}> */}
-					<SSRProvider>
-						<NativeBaseProvider
-							// theme={
-								// scheme === "dark" ? nativeBaseDarkTheme : nativeBaseLightTheme
-							// }
-							>
-							<RootNavigator scheme={scheme} />
-						</NativeBaseProvider>
-					</SSRProvider>
-				{/* </PersistGate> */}
+			{/* <PersistGate loading={null} persistor={persistor}> */}
+			<SSRProvider>
+				<RootNavigator scheme={scheme} />
+			</SSRProvider>
+			{/* </PersistGate> */}
 			{/* </Provider> */}
 		</>
 	);

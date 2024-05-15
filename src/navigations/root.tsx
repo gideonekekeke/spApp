@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 // import { useAppSelector } from "src/ducks/useful-hooks";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthStackNavigator } from "./auth-stack";
+import ToastManager, { Toast } from "toastify-react-native";
 
 // import { BottomTabNavigator } from "./bottom-tab";
 
@@ -32,6 +33,7 @@ const RootNavigator: React.FC<RootParams> = ({ scheme }) => {
 		<NavigationContainer
 		// theme={scheme === "dark" ? navigationDarkTheme : navigationLightTheme}
 		>
+			<ToastManager />
 			<StackNav.Navigator>
 				<StackNav.Screen
 					name='Main'

@@ -97,6 +97,7 @@ export default function CreateUserScreen() {
 				<View style={tw`mt-4`}>
 					<Text>Create Password</Text>
 					<TextInput
+						secureTextEntry={true}
 						role='checkbox'
 						onChangeText={setPassword}
 						id='email'

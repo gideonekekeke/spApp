@@ -47,9 +47,7 @@ export default function RegisterScreen() {
 
 	const OnRegister = async () => {
 		setLoad(true);
-		navigation.navigate("verify", {
-		data: "yooo",
-		})
+
 		try {
 			const response: any = await RegisterUser({
 				username: userName,
@@ -116,14 +114,19 @@ export default function RegisterScreen() {
 					</TouchableOpacity>
 				)}
 
-				<View style={tw`mt-15`}>
+				<Text
+					style={tw`flex-row justify-center w-full text-5 items-center text-center mt-7 font-bold`}>
+					OR
+				</Text>
+
+				<View style={tw`mt-4`}>
 					{type === "email" && (
 						<TouchableOpacity
 							onPress={() => {
 								settype("phone");
 								console.log("yoooo");
 							}}
-							style={tw`p-4 w-full mt-4 justify-center items-center border border-[#0F66D2]`}>
+							style={tw`p-4 w-full  justify-center items-center border border-[#0F66D2]`}>
 							<Text
 								style={tw`text-4 font-bold flex items-center justify-center`}>
 								<Text style={tw`hidden`}>
@@ -139,7 +142,7 @@ export default function RegisterScreen() {
 							onPress={() => {
 								settype("email");
 							}}
-							style={tw`p-4 w-full mt-4 justify-center items-center border border-[#0F66D2]`}>
+							style={tw`p-4 w-full  justify-center items-center border border-[#0F66D2]`}>
 							<Text
 								style={tw`text-4 font-bold flex items-center justify-center`}>
 								<Text style={tw`hidden`}>
@@ -163,6 +166,17 @@ export default function RegisterScreen() {
 						</Text>
 					</TouchableOpacity>
 				</View>
+				<Text
+					style={tw`flex-row text-[#0F66D2] justify-center w-full text-4 items-center text-center mt-7 font-bold`}>
+					Already have an account?{" "}
+					<Text
+						onPress={() => {
+							navigation.navigate("Login");
+						}}
+						style={tw`underline`}>
+						Log In
+					</Text>
+				</Text>
 			</View>
 		</SafeAreaView>
 	);

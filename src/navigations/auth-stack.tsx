@@ -5,6 +5,8 @@ import WelcomeScreen from "../screens/welcome";
 import RegisterScreen from "../screens/register";
 import CodeVerification from "../screens/code-verification";
 import CreateUserScreen from "../screens/create-user";
+import { Ionicons } from "@expo/vector-icons";
+import {  useNavigation } from "@react-navigation/native";
 
 export type AuthStackParams = {
 	Welcome?: undefined;
@@ -27,6 +29,7 @@ export /**
  * @return {*}
  */
 const AuthStackNavigator: React.FC<{}> = () => {
+	const navigation = useNavigation<any>()
 	return (
 		<StackNav.Navigator
 			screenOptions={{ gestureEnabled: true }}
@@ -39,13 +42,34 @@ const AuthStackNavigator: React.FC<{}> = () => {
 			<StackNav.Screen
 				name='Login'
 				component={LoginScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerShown: true,
+					headerLeft: () => (
+						<Ionicons
+							onPress={() => navigation.navigate("Register")}
+							name='chevron-back'
+							size={24}
+							color='#0F66D2'
+						/>
+					),
+				}}
 			/>
 
 			<StackNav.Screen
 				name='Register'
 				component={RegisterScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerShown: true,
+					// title: "",
+					headerLeft: () => (
+						<Ionicons
+							onPress={() => navigation.navigate("Welcome")}
+							name='chevron-back'
+							size={24}
+							color='#0F66D2'
+						/>
+					),
+				}}
 			/>
 
 			<StackNav.Screen

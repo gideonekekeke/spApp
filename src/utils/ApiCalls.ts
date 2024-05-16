@@ -21,3 +21,13 @@ export const CreateNewUser = async (data: any) => {
 		return err;
 	}
 };
+
+
+export const LoginUser = async (data:any) => {
+	try {
+		const response = await AuthInstance.post("/app/user/auth/login", data);
+		return response;
+	} catch (err) {
+		return err;
+	}
+};

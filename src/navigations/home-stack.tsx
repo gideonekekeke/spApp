@@ -1,13 +1,14 @@
 import React from "react";
-import { Alert, GestureResponderEvent } from "react-native";
+import { Alert, GestureResponderEvent, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/home";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { Icon, IconButton } from "native-base";
+import { Icon } from "native-base";
 import { StackScreenProps } from "@react-navigation/stack";
 // import { useAppSelector } from "src/ducks/useful-hooks";
 import { AuthStackNavigator } from "./auth-stack";
 import { SettingsStack } from "./settings-stack";
+import { Entypo } from "@expo/vector-icons";
 
 export type HomeStackParams = {
 	Home: undefined;
@@ -20,21 +21,21 @@ const StackNav = createNativeStackNavigator<HomeStackParams>();
 const CloseIcon = (onClose: () => void) => (
 	<MaterialCommunityIcons name='close' size={22} onPress={onClose} />
 );
-
-const SettingsButton = (
-	onPress?: (event: GestureResponderEvent) => void,
-	isDisabled?: boolean,
-) => (
-	<IconButton
-		isDisabled={isDisabled}
-		alignSelf='flex-end'
-		variant='unstyled'
-		icon={
-			<Icon as={MaterialIcons} name='settings' size='lg' color='primary.700' />
-		}
-		onPress={isDisabled ? null : onPress}
-	/>
-);
+//
+// const SettingsButton = (
+// onPress?: (event: GestureResponderEvent) => void,
+// isDisabled?: boolean,
+// ) => (
+// <IconButton
+// isDisabled={isDisabled}
+// alignSelf='flex-end'
+// variant='unstyled'
+// icon={
+// <Icon as={MaterialIcons} name='settings' size='lg' color='primary.700' />
+// }
+// onPress={isDisabled ? null : onPress}
+// />
+// );
 
 type HomeStackProps = StackScreenProps<HomeStackParams, "Home">;
 
@@ -64,20 +65,19 @@ const HomeStackNavigator: React.FC<any> = ({ navigation }) => {
 
 	return (
 		<StackNav.Navigator>
+			{/* <Text>dfghfdjk</Text> */}
 			<StackNav.Screen
 				name='Home'
 				component={HomeScreen}
 				options={{
-					headerTitle: "Home",
-					headerRight: () =>
-						SettingsButton(() => navigation.navigate("SettingsStack")),
+					headerShown : false
+					// headerTitle: "Home",
+					// headerRight: () => <Entypo name='menu' size={24} color='black' />,
 				}}
 			/>
-			<StackNav.Screen
-				name='SettingsStack'
-				component={SettingsStack}
-				options={{ headerTitle: "Settings", animationTypeForReplace: "pop" }}
-			/>
+
+
+
 			<StackNav.Screen
 				name='Auth'
 				component={AuthStackNavigator}

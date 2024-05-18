@@ -2,11 +2,21 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { ExploreScreen } from "src/screens";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { HomeStackNavigator } from "./home-stack";
+import Downloads from "../screens/downloads";
+import Plans from "../screens/plans";
+import SettingsScreen from "../screens/settings";
+import { Text, View } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import HeaderRight from "../components/header/HeaderRight";
+import HeaderLeft from "../components/header/HeaderLeft";
 
 export type BottomTabParams = {
 	HomeTab: undefined;
 	Explore: undefined;
 	Profile: undefined;
+	downloads: undefined;
+	plans: undefined;
+	settings: undefined;
 };
 
 const Tabs = createBottomTabNavigator<BottomTabParams>();
@@ -23,15 +33,27 @@ const HomeIcon = ({ focused, color, size }: TabBarIconProps) => (
 	<MaterialCommunityIcons
 		name={focused ? "home" : "home-outline"}
 		color={color}
-		size={size}
+		size={26}
 	/>
 );
 
-const ExploreIcon = ({ focused, color, size }: TabBarIconProps) => (
-	<MaterialIcons
-		name={focused ? "search" : "search"}
-		color={color}
-		size={size}
+const DownloadIcon = ({ focused, color, size }: TabBarIconProps) => (
+	<AntDesign
+		name={focused ? "clouddownload" : "clouddownloado"}
+		size={26}
+		color='black'
+	/>
+);
+
+const PlansIcon = ({ focused, color, size }: TabBarIconProps) => (
+	<AntDesign name={focused ? "play" : "playcircleo"} size={24} color='black' />
+);
+
+const SettingsIcon = ({ focused, color, size }: TabBarIconProps) => (
+	<MaterialCommunityIcons
+		name={focused ? "account-settings" : "account-settings-outline"}
+		size={26}
+		color='black'
 	/>
 );
 
@@ -42,15 +64,54 @@ export /**
  */
 const BottomTabNavigator: React.FC<{}> = () => {
 	return (
-		<Tabs.Navigator screenOptions={{ tabBarHideOnKeyboard: true }}>
+		<Tabs.Navigator
+			screenOptions={{
+				tabBarHideOnKeyboard: true,
+				headerShown: true,
+				headerTitle: "",
+				headerRight: () => <HeaderRight />,
+				headerLeft: () => <HeaderLeft />,
+			}}>
 			<Tabs.Screen
 				name='HomeTab'
 				component={HomeStackNavigator}
 				options={{
 					title: "Home",
-					headerTitle: "Home",
-					headerShown: false,
+					headerTitle: "",
+					// headerShown: false,
 					tabBarIcon: HomeIcon,
+				}}
+			/>
+
+			<Tabs.Screen
+				name='downloads'
+				component={Downloads}
+				options={{
+					title: "downloads",
+					headerTitle: "",
+					// headerShown: false,
+					tabBarIcon: DownloadIcon,
+				}}
+			/>
+
+			<Tabs.Screen
+				name='plans'
+				component={Plans}
+				options={{
+					title: "plans",
+					headerTitle: "",
+					// headerShown: false,
+					tabBarIcon: PlansIcon,
+				}}
+			/>
+			<Tabs.Screen
+				name='settings'
+				component={SettingsScreen}
+				options={{
+					title: "settings",
+					headerTitle: "",
+					// headerShown: false,
+					tabBarIcon: SettingsIcon,
 				}}
 			/>
 		</Tabs.Navigator>

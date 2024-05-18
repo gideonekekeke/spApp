@@ -27,6 +27,9 @@ import {
 	Nunito_900Black,
 	Nunito_900Black_Italic,
 } from "@expo-google-fonts/nunito";
+import { persistor, store } from "./reduxCore/store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 // const persistor = persistStore(store);
 
@@ -65,20 +68,20 @@ export const App = () => {
 		Nunito_900Black_Italic,
 	});
 
-	if (!fontsLoaded) {
-		return <StatusBar />;
-	}
+	// if (!fontsLoaded) {
+		// return <StatusBar />;
+	// }
 
 	return (
 		<>
 			<StatusBar />
-			{/* <Provider store={store}> */}
-			{/* <PersistGate loading={null} persistor={persistor}> */}
-			<SSRProvider>
-				<RootNavigator scheme={scheme} />
-			</SSRProvider>
-			{/* </PersistGate> */}
-			{/* </Provider> */}
+			<Provider store={store}>
+				<PersistGate loading={null} persistor={persistor}>
+					<SSRProvider>
+						<RootNavigator scheme={scheme} />
+					</SSRProvider>
+				</PersistGate>
+			</Provider>
 		</>
 	);
 };

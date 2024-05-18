@@ -11,12 +11,16 @@ import tw from "twrnc";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthStackParams } from "../navigations/auth-stack";
 import { useNavigation, Link } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 // import pic from "../assets/splash.png";
 
 type WelcomeScreenParams = StackNavigationProp<AuthStackParams, "Welcome">;
 
 export default function WelcomeScreen() {
 	const navigation = useNavigation<WelcomeScreenParams>();
+	const user = useSelector((state: any) => state?.main?.current);
+
+	console.log("yooooo", user);
 	return (
 		<View>
 			{/* <Image src='../assets/log.png' /> */}
@@ -38,8 +42,8 @@ export default function WelcomeScreen() {
 					style={tw`bg-white p-4 w-70 justify-center items-center`}>
 					<Text style={tw`text-4 font-bold`}>Get Started</Text>
 				</TouchableOpacity>
-				<Link style={tw`text-white mt-3 text-4 font-bold`} to={'/Login'}>
-				<Text>Login</Text>
+				<Link style={tw`text-white mt-3 text-4 font-bold`} to={"/Login"}>
+					<Text>Login</Text>
 				</Link>
 			</View>
 		</View>

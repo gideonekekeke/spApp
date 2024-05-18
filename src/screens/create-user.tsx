@@ -12,9 +12,14 @@ import PhoneNumberInput from "../components/form/phoneinput";
 import ShowToast from "../components/Toast";
 import { CreateNewUser } from "../utils/ApiCalls";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import jwtDecode from "jwt-decode";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { storeCurrentUser } from "../reduxCore/reducer";
+import { useDispatch } from "react-redux";
 
 export default function CreateUserScreen() {
 	const [password, setPassword] = useState("");
+	const dispatch = useDispatch();
 	const [load, setLoad] = useState(false);
 	const [firstname, setFirstname] = useState("");
 	const [phone_number, setPhone_number] = useState("");
@@ -27,6 +32,8 @@ export default function CreateUserScreen() {
 	console.log("now", data);
 	const creatingUser = async () => {
 		setLoad(true);
+		const storedToken = await AsyncStorage.getItem("spMobile");
+		console.log("Stored Token:", storedToken);
 
 		try {
 			const response: any = await CreateNewUser({
@@ -43,13 +50,10 @@ export default function CreateUserScreen() {
 			console.log(response);
 
 			if (response?.status === 201) {
-				// const decoded = jwtDecode(response?.data.access_token);
-
+				// Store the token in AsyncStorage
+				await AsyncStorage.setItem("spMobile", response?.data?.access_token);
 				ShowToast(true, "User Created");
-				// cookies.set("signaladoc_production", response?.data?.access_token, {
-				// expires: new Date(decoded.exp! * 1000),
-				// });
-				// dispatch(StoreCurrentUser(response?.data));
+				dispatch(storeCurrentUser(response?.data));
 				setLoad(false);
 			} else {
 				Object.entries(response?.response?.data).forEach(

@@ -1,9 +1,9 @@
-import { AuthInstance } from "./AxiosConfig";
+import { createAuthInstance } from "./AxiosConfig";
 
 export const RegisterUser = async (data: any) => {
 	try {
+		const AuthInstance = await createAuthInstance();
 		const response = await AuthInstance.post("/video/user/auth/register", data);
-
 		return response;
 	} catch (err) {
 		return err;
@@ -12,6 +12,7 @@ export const RegisterUser = async (data: any) => {
 
 export const CreateNewUser = async (data: any) => {
 	try {
+		const AuthInstance = await createAuthInstance();
 		const response = await AuthInstance.post(
 			"/video/user/auth/register/create",
 			data,
@@ -22,9 +23,9 @@ export const CreateNewUser = async (data: any) => {
 	}
 };
 
-
-export const LoginUser = async (data:any) => {
+export const LoginUser = async (data: any) => {
 	try {
+		const AuthInstance = await createAuthInstance();
 		const response = await AuthInstance.post("/app/user/auth/login", data);
 		return response;
 	} catch (err) {

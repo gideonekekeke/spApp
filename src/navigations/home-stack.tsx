@@ -9,11 +9,13 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { AuthStackNavigator } from "./auth-stack";
 import { SettingsStack } from "./settings-stack";
 import { Entypo } from "@expo/vector-icons";
+import DetailScreen from "../screens/video-details";
 
 export type HomeStackParams = {
 	Home: undefined;
 	SettingsStack: undefined;
 	Auth: undefined;
+	DetailScreen: undefined;
 };
 
 const StackNav = createNativeStackNavigator<HomeStackParams>();
@@ -70,13 +72,21 @@ const HomeStackNavigator: React.FC<any> = ({ navigation }) => {
 				name='Home'
 				component={HomeScreen}
 				options={{
-					headerShown : false
+					headerShown: false,
 					// headerTitle: "Home",
 					// headerRight: () => <Entypo name='menu' size={24} color='black' />,
 				}}
 			/>
 
-
+			<StackNav.Screen
+				name='DetailScreen'
+				component={DetailScreen}
+				options={{
+					headerShown: false,
+					// headerTitle: "Home",
+					// headerRight: () => <Entypo name='menu' size={24} color='black' />,
+				}}
+			/>
 
 			<StackNav.Screen
 				name='Auth'

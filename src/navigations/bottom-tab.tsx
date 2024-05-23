@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { ExploreScreen } from "src/screens";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { HomeStackNavigator } from "./home-stack";
 import Downloads from "../screens/downloads";
 import Plans from "../screens/plans";
@@ -9,6 +9,8 @@ import { Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import HeaderRight from "../components/header/HeaderRight";
 import HeaderLeft from "../components/header/HeaderLeft";
+import { Feather } from "@expo/vector-icons";
+import tw from 'twrnc'
 
 export type BottomTabParams = {
 	HomeTab: undefined;
@@ -17,6 +19,7 @@ export type BottomTabParams = {
 	downloads: undefined;
 	plans: undefined;
 	settings: undefined;
+	add : undefined;
 };
 
 const Tabs = createBottomTabNavigator<BottomTabParams>();
@@ -57,6 +60,11 @@ const SettingsIcon = ({ focused, color, size }: TabBarIconProps) => (
 	/>
 );
 
+
+const PlusIcon = ({ focused, color, size }: TabBarIconProps) => (
+	<Feather  name='plus-circle' size={50} color='black' style = {tw`-top-5 bg-white  pl-3 pr-3 -pt-7 -pb-5 z-50 absolute rounded-md `} />
+);
+
 export /**
  *Bottom Tab Navigator, used for Navigating between all bottom tab screens
  *
@@ -65,6 +73,7 @@ export /**
 const BottomTabNavigator: React.FC<{}> = () => {
 	return (
 		<Tabs.Navigator
+		
 			screenOptions={{
 				tabBarHideOnKeyboard: true,
 				headerShown: true,
@@ -91,6 +100,17 @@ const BottomTabNavigator: React.FC<{}> = () => {
 					headerTitle: "",
 					// headerShown: false,
 					tabBarIcon: DownloadIcon,
+				}}
+			/>
+
+			<Tabs.Screen
+				name='add'
+				component={Downloads}
+				options={{
+					title: "downloads",
+					headerTitle: "",
+					// headerShown: false,
+					tabBarIcon: PlusIcon,
 				}}
 			/>
 

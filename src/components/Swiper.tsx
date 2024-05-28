@@ -25,9 +25,9 @@ const Swiper = () => (
 
 const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
-	container: { flex: 1, backgroundColor: "white", height : 150, borderRadius : 10  },
+	container: { flex: 1, backgroundColor: "white", height : 120, borderRadius : 10  },
 	child: { width, justifyContent: "center",  overflow : 'hidden', fontSize : 10 },
-	text: { fontSize: 50, textAlign: "center" },
+	text: { fontSize: 30, textAlign: "center" },
 });
 
 export default Swiper;

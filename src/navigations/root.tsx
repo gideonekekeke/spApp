@@ -32,7 +32,9 @@ export /**
 const RootNavigator: React.FC<RootParams> = ({ scheme }) => {
 	// redux handlers
 	// const loggedIn = useAppSelector((state) => state.user.loggedIn);
-	const user = useSelector((state: any) => state?.main?.current);
+	const user = useSelector((state: any) => state?.persistedReducer?.main?.current);
+
+	// console.log('userrtgyhujk', user);
 
 	return (
 		<NavigationContainer

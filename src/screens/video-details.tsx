@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import VideoScreen from "../components/VideoPlayer/ExpovideoPlayer";
+import { timeAgo } from "../helpers/VideoTimeFormatter";
 
 const DetailScreen = () => {
 	const route = useRoute();
@@ -11,14 +12,14 @@ const DetailScreen = () => {
 
 	return (
 		<ScrollView style={styles.container}>
-			<VideoScreen />
+			<VideoScreen url = {video?.video_path} />
 
 			<View style={styles.infoContainer}>
 				<Text style={styles.title}>{video.title}</Text>
 				<Text
 					style={
 						styles.viewsAndDate
-					}>{`${video.views} views • ${video.uploadDate}`}</Text>
+					}>{`${video.view} views • ${timeAgo(video?.created_at)}`}</Text>
 			</View>
 
 			<Text style={styles.description}>{video.description}</Text>

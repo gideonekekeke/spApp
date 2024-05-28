@@ -4,6 +4,7 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import rootReducer from "./reducer"; // Assuming this imports your root reducer
 import { RootReducer, rootReducer } from "./rootReducer";
+import { SpVideoApi } from "./apislice";
 
 const persistConfig = {
 	key: "root-sp",
@@ -16,11 +17,11 @@ const persistConfig = {
 const persistedReducer = persistReducer<RootReducer>(persistConfig, rootReducer);
 
 export const store = configureStore({
-	reducer: persistedReducer,
+	reducer: { persistedReducer , [SpVideoApi.reducerPath]: SpVideoApi.reducer},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: false, // Disable this check because Redux Persist uses non-serializable values
-		}),
+		}).concat(SpVideoApi.middleware)
 });
 
 export const persistor = persistStore(store);

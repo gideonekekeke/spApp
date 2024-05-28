@@ -1,16 +1,16 @@
 import { useVideoPlayer, VideoView } from "expo-video";
 import { useEffect, useRef, useState } from "react";
 import { PixelRatio, StyleSheet, View, Button } from "react-native";
-import tw from 'twrnc'
-import { getWindowWidth } from "../../helpers/constants";
+// import tw from 'twrnc'
+// import { getWindowWidth } from "../../helpers/constants";
 
 const videoSource =
 	"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
-export default function VideoScreen() {
+export default function VideoScreen({url}:any) {
 	const ref = useRef(null);
 	const [isPlaying, setIsPlaying] = useState(true);
-	const player = useVideoPlayer(videoSource, (player) => {
+	const player = useVideoPlayer(url, (player) => {
 		player.loop = true;
 		player.play();
 	});

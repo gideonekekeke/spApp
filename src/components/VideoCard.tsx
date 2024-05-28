@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import tw from "twrnc";
 import { useNavigation } from "@react-navigation/native";
+import { timeAgo } from "../helpers/VideoTimeFormatter";
 
 const YouTubeCard = ({ video }: any) => {
      const navigation = useNavigation<any>();
@@ -9,7 +10,7 @@ const YouTubeCard = ({ video }: any) => {
 		<TouchableOpacity
 			onPress={() => navigation.navigate("DetailScreen", { video })}>
 			<View style={styles.card}>
-				<Image source={{ uri: video.thumbnail }} style={styles.thumbnail} />
+				<Image source={{ uri: video.large_thumbnail_path }} style={styles.thumbnail} />
 				<View style={styles.infoContainer}>
 					<View style={styles.textContainer}>
 						<Text style={styles.title} numberOfLines={2}>
@@ -19,7 +20,7 @@ const YouTubeCard = ({ video }: any) => {
 						<Text
 							style={
 								styles.viewsAndDate
-							}>{`${video.views} views • ${video.uploadDate}`}</Text>
+							}>{`${video.view} views • ${timeAgo(video?.created_at)}`}</Text>
 					</View>
 				</View>
 			</View>
